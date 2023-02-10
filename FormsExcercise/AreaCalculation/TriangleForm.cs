@@ -29,11 +29,27 @@ namespace CalculateArea
 
         private void calculateBtn_Click(object sender, EventArgs e)
         {
-            float s = (float.Parse(lengthATxt.Text) + float.Parse(lengthBTxt.Text) + float.Parse(lengthCTxt.Text)) / 2;
+            try
+            {
+                float s = (float.Parse(lengthATxt.Text) + float.Parse(lengthBTxt.Text) + float.Parse(lengthCTxt.Text)) / 2;
 
-            area = Math.Sqrt(s * (s - float.Parse(lengthATxt.Text)) * (s - float.Parse(lengthBTxt.Text)) * (s - float.Parse(lengthCTxt.Text)));
+                float sArea = (s * (s - float.Parse(lengthATxt.Text)) * (s - float.Parse(lengthBTxt.Text)) * (s - float.Parse(lengthCTxt.Text)));
 
-            resultsLbl.Text = "The area of the triangle is: " + area.ToString();
+                if (sArea <= 0)
+                {
+                    resultsLbl.Text = "Impossible Triangle";
+                }
+                else
+                {
+                    area = Math.Sqrt(sArea);
+                    resultsLbl.Text = "The Area of the Triangle is: " + area.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error " + ex.Message);
+                
+            }           
         }
     }
 }
